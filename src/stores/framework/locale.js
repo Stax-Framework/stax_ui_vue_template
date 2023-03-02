@@ -1,5 +1,4 @@
 import { defineStore } from "pinia"
-import { RegisterEvent } from "@/listener"
 
 export const useLocaleStore = defineStore("locale", {
   state: () => ({
@@ -31,10 +30,4 @@ export const useLocaleStore = defineStore("locale", {
       this.locales = locales;
     }
   }
-})
-
-const localeStore = useLocaleStore();
-
-RegisterEvent("Locale_SetLocales", (data) => {
-  localeStore.SetLocales(data.locales)
 })

@@ -1,5 +1,4 @@
 import { defineStore } from "pinia"
-import { RegisterEvent } from "@/listener"
 
 export const useConfigStore = defineStore("config", {
   state: () => ({
@@ -31,10 +30,4 @@ export const useConfigStore = defineStore("config", {
       this.configs = configs;
     }
   }
-})
-
-const configStore = useConfigStore();
-
-RegisterEvent("Config_SetConfigs", (data) => {
-  configStore.SetConfigs(data.configs)
 })
