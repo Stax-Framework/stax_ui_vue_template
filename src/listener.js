@@ -1,5 +1,7 @@
-import store from "./store/index"
 import axios from "axios"
+
+// NEW SYSTEM
+const EVENTS = [];
 
 document.onreadystatechange = () => {
   if (!document.readyState === "complete") {
@@ -7,10 +9,21 @@ document.onreadystatechange = () => {
   }
 
   window.addEventListener("message", (event) => {
-    if (!event.mutation) { return; }
+    const name = event.data.name;
+    const data = event.data.data;
 
-    store.commit(event.mutation, event.payload);
-  });
-  
-  axios.post(`http://${GetParentResourceName()}/ready`)
+    EVENTS.forEach(e => {
+      if (e.name == name) {
+        e.callback(data);
+      }
+    })
+  })
+
+  axios.post(`http://${GetParentResourceName()}/ready`);
 }
+
+function RegisterEvent(name, callback) {
+  EVENTS.push({ name, callback });
+}
+
+export default RegisterEvent

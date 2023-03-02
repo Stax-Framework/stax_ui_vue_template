@@ -1,5 +1,5 @@
 <template>
   <div>
-    Home View
+    Default View
   </div>
 </template>
